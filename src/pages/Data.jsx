@@ -1,54 +1,53 @@
-import React from 'react'
-import { Body } from '../components/layout'
+import { Title } from '../components/atoms'
+import { Header, SubHeaderStyled } from '../components/layout'
 import { ITATable } from '../components/organisms'
-import { Container } from '../styles'
+import { urls } from '../constants'
+import useFetch from '../hooks/useFetch'
+import { colors, Container, FlexBox } from '../styles'
 
 const columns = [
   {
-    id: 'name',
-    label: 'Name',
+    id: 'title',
+    label: 'Nombre',
   },
   {
-    id: 'surnames',
-    label: 'Apellidos',
+    id: 'type',
+    label: 'Tipo',
   },
   {
-    id: 'age',
-    label: 'Edad',
-    cell: (row) => (
-      <span style={{ color: row.age > 50 ? 'green' : 'red' }}>{row.age}</span>
-    ),
+    id: 'city',
+    label: 'Ciudad',
   },
   {
-    id: 'occupation',
-    label: 'Ocupacion',
-  },
-]
-
-const data = [
-  {
-    id: 1,
-    name: 'Juan',
-    surnames: 'Perez',
-    age: 25,
-    occupation: 'Developer',
+    id: 'district',
+    label: 'Barrio',
   },
   {
-    id: 2,
-    name: 'Pedro',
-    surnames: 'Gomez',
-    age: 75,
-    occupation: 'Developer',
+    id: 'price',
+    label: 'Precio',
   },
 ]
 
 function Data() {
+  const { data, loading, error, isSuccess, hasData } = useFetch(urls.houses)
+
   return (
-    <Body>
+    <FlexBox>
+      <Header />
+      <SubHeaderStyled>
+        <Container>
+          <Title order={2} color={colors.font.base}>
+            Datos de las viviendas
+          </Title>
+        </Container>
+      </SubHeaderStyled>
       <Container style={{ marginTop: '2rem' }}>
-        <ITATable columns={columns} data={data} />
+        {loading && <div>Loading...</div>}
+        {error && <div>Error</div>}
+        {!hasData && <div>No hay datos</div>}
+        {isSuccess && <ITATable columns={columns} data={data} />}
       </Container>
-    </Body>
+    </FlexBox>
   )
 }
 

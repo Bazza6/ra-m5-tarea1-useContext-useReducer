@@ -4,10 +4,14 @@ import { TableCell } from './styles'
 
 function TableBody() {
   const { state } = useContext(TableContext)
-  const { data, columns } = state
+  const { actualPage, itemPerPage, data, columns } = state
+
+  const firstValue = (actualPage - 1) * itemPerPage // esto no deberia cambiar cuando se cambia el numero de elementos por pagina
+  const secondValue = Number(firstValue) + Number(itemPerPage)
+
   return (
     <tbody>
-      {data.map((d) => (
+      {data.slice(firstValue, secondValue).map((d) => (
         <tr key={d.id}>
           {columns
             .filter((col) => !col.isHidden)

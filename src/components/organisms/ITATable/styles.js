@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TableCell = styled.td`
   border: 1px solid;
-  padding: 0.5rem;
+  padding: 0.8rem;
 `
 
 export const TableStyled = styled.table`

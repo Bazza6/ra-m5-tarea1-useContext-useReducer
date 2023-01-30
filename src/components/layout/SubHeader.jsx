@@ -6,7 +6,7 @@ import { Button, Icon } from '../atoms'
 import { SelectGroup } from '../molecules'
 import { setSelectedCity, setSelectedType } from '../../store/houses.slice'
 
-const SubHeaderStyled = styled(FlexBox)`
+export const SubHeaderStyled = styled(FlexBox)`
   padding-top: ${dimensions.spacing.xl};
   padding-bottom: ${dimensions.spacing.xl};
   background-color: ${colors.clearBlueBg};
