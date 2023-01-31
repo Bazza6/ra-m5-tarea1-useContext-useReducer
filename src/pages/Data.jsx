@@ -29,7 +29,7 @@ const columns = [
 ]
 
 function Data() {
-  const { data, loading, error, isSuccess, hasData } = useFetch(urls.houses)
+  const { data, loading } = useFetch(urls.houses)
 
   return (
     <FlexBox>
@@ -42,10 +42,7 @@ function Data() {
         </Container>
       </SubHeaderStyled>
       <Container style={{ marginTop: '2rem' }}>
-        {loading && <div>Loading...</div>}
-        {error && <div>Error</div>}
-        {!hasData && <div>No hay datos</div>}
-        {isSuccess && <ITATable columns={columns} data={data} />}
+        <ITATable columns={columns} data={data} loading={loading} />
       </Container>
     </FlexBox>
   )

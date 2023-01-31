@@ -1,17 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { TableContext } from './store/context'
 import { TableCell } from './styles'
 
 function TableBody() {
   const { state } = useContext(TableContext)
-  const { actualPage, itemPerPage, data, columns } = state
+  const { actualPage, itemPerPage, data, columns, sortColumn } = state
+  if (!data) return null
 
-  const firstValue = (actualPage - 1) * itemPerPage // esto no deberia cambiar cuando se cambia el numero de elementos por pagina
+  const firstValue = (actualPage - 1) * itemPerPage
   const secondValue = Number(firstValue) + Number(itemPerPage)
+
+  const sortData = [...data].sort((a, b) =>
+    a[sortColumn] > b[sortColumn] ? 1 : -1,
+  )
 
   return (
     <tbody>
-      {data.slice(firstValue, secondValue).map((d) => (
+      {sortData.slice(firstValue, secondValue).map((d) => (
         <tr key={d.id}>
           {columns
             .filter((col) => !col.isHidden)

@@ -1,16 +1,18 @@
 // import SelectGroup from './SelectGroup'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { colors, FlexBox } from '../../styles'
-import { Icon, Text } from '../atoms'
-import { TableContext } from '../organisms/ITATable/store/context'
-import { Actions } from '../organisms/ITATable/store/reducer'
+import { colors, FlexBox } from '../../../styles'
+import { Icon, Text } from '../../atoms'
+import { TableContext } from './store/context'
+import { Actions } from './store/reducer'
 
 function Paging() {
   const { state, dispatch } = useContext(TableContext)
+  console.log('state:::', state)
+
   const { actualPage, itemPerPage, data } = state
-  const dataLength = data.length
-  const totalPage = Math.ceil(dataLength / itemPerPage)
+  if (!data) return null
+  const totalPage = Math.ceil(data.length / itemPerPage)
 
   const buttonLeftDisabled = actualPage === 1
   const buttonRightDisabled = actualPage === totalPage

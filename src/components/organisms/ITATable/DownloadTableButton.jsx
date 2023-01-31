@@ -1,17 +1,12 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
-import { FlexBox } from '../../styles'
-import { Button, Icon } from '../atoms'
-import { TableContext } from '../organisms/ITATable/store/context'
+import { FlexBox } from '../../../styles'
+import { Icon } from '../../atoms'
+import { TableContext } from './store/context'
+import { ButtonStyled } from './styles'
 
 function DownloadTableButton() {
   const { state } = useContext(TableContext)
   const { data, columns } = state
-  const ButtonStyled = styled(Button)`
-    background-color: #32cd32;
-    align-self: flex-end;
-    margin-bottom: 2rem;
-  `
 
   const handleDownload = () => {
     const header = columns.map((col) => col.label).join(',')

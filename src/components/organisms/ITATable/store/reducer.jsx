@@ -5,6 +5,7 @@ export const initialState = {
   columns: [],
   actualPage: 1,
   itemPerPage: 10,
+  sortColumn: 'title',
 }
 
 export const Actions = {
@@ -12,6 +13,7 @@ export const Actions = {
   SET_COLUMNS: 'SET_COLUMNS',
   SET_ACTUAL_PAGE: 'SET_ACTUAL_PAGE',
   SET_ITEM_PER_PAGE: 'SET_ITEM_PER_PAGE',
+  SET_SORT_COLUMNS: 'SET_SORT_COLUMNS',
 }
 
 // eslint-disable-next-line default-param-last
@@ -35,6 +37,11 @@ export const tableReducer = (state = initialState, action) => {
     case Actions.SET_ACTUAL_PAGE:
       return createNextState(state, (draft) => {
         draft.actualPage = state.actualPage + action.payload
+      })
+
+    case Actions.SET_SORT_COLUMNS:
+      return createNextState(state, (draft) => {
+        draft.sortColumn = action.payload
       })
 
     default:

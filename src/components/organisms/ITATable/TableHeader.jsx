@@ -1,20 +1,34 @@
 import React, { useContext } from 'react'
 import { TableContext } from './store/context'
 import { TableCell } from './styles'
+import { Actions } from './store/reducer'
 
 function TableHeader() {
-  const { state } = useContext(TableContext)
-  const { columns } = state
+  const { state, dispatch } = useContext(TableContext)
+  const { columns, sortColumn } = state
+
+  const handleClick = (id) => {
+    dispatch({ type: Actions.SET_SORT_COLUMNS, payload: id })
+  }
+
+  // console.log(sortColumn)
   return (
     <thead>
       <tr>
-        {columns
-          .filter((col) => !col.isHidden)
-          .map((col) => (
-            <TableCell as="th" key={col.id}>
+        {columns.map((col) => (
+          <TableCell
+            style={{
+              cursor: 'pointer',
+            }}
+            as="th"
+            key={col.id}
+            onClick={() => handleClick(col.id)}
+          >
+            <span style={{ color: sortColumn === col.id ? 'red' : 'black' }}>
               {col.label}
-            </TableCell>
-          ))}
+            </span>
+          </TableCell>
+        ))}
       </tr>
     </thead>
   )

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { useContext } from 'react'
-import { TableContext } from '../organisms/ITATable/store/context'
-import { Actions } from '../organisms/ITATable/store/reducer'
-import { Label, Select, Text } from '../atoms'
-import { colors, FlexBox } from '../../styles'
+import { TableContext } from './store/context'
+import { Actions } from './store/reducer'
+import { Label, Select, Text } from '../../atoms'
+import { colors, FlexBox } from '../../../styles'
 // import { FlexBox } from '../../styles'
 
 const StyledItemPerPage = styled(FlexBox)`
